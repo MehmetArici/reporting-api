@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Tymon\JWTAuth\Facades\JWTAuth;
+use JWTAuth;
+use Illuminate\Http\Request;
 
 class MerchantController extends Controller
 {
@@ -14,6 +15,9 @@ class MerchantController extends Controller
     public function __construct()
     {
         $this->middleware('jwt', ['except' => ['login']]);
+        if ((\App::environment() == 'testing') && array_key_exists("HTTP_Authorization",  Request::server())) {
+            JWTAuth::setRequest(\Route::getCurrentRequest());
+        }
     }
 
     /**
@@ -31,7 +35,6 @@ class MerchantController extends Controller
                 'message'   => 'Error: Merchant User credentials is not valid'
             ], 401);
         }
-
         return $this->respondWithToken($token);
     }
 

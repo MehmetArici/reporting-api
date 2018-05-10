@@ -15,6 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->integer('id')->primary();
+            $table->string('transactionId');
             $table->date('fromDate');
             $table->date('toDate');
             $table->integer('merchant_id')->unsigned()->nullable();
@@ -27,6 +28,15 @@ class CreateTransactionsTable extends Migration
             $table->integer('total');
             $table->string('currency');
             $table->timestamps();
+            $table->string('status');
+            $table->string('operation');
+            $table->string('paymentMethod');
+            $table->string('errorCode');
+            $table->string('referenceNo');
+            $table->string('message');
+            $table->integer('agentInfoId');
+            $table->boolean('isIpn');
+            $table->boolean('isRefundable');
         });
     }
 

@@ -178,7 +178,6 @@ class TransactionController extends Controller
     /**
      * Request for all information of transaction.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function transaction()
